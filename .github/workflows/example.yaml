@@ -9,10 +9,23 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: fx31337/mql-tester-action@master
+        with:
+          Login: ${{ secrets.MT5_LOGIN }}
+          Password: ${{ secrets.MT5_PASSWORD }}
+          Server: MetaQuotes-Demo
+          TestExpert: EA31337-Advanced-v3.000-rc2.ex5
+          TestFromDate: 2024.01.01
+          TestPeriod: M15
+          TestSymbol: EURUSD
+          TestToDate: 2024.04.01
+          UrlExpert: >-
+            https://github.com/EA31337/EA31337/releases/download/v3.000-rc2/EA31337-Advanced-v3.000-rc2.ex5
+          Version: 5
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - run: id
+      - run: env
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
